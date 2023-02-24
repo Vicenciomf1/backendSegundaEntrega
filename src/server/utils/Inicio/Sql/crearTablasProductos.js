@@ -1,6 +1,6 @@
 import mysql from "../../../config/mysqlconnection.js";
-import productosRaw from "./productos.js";
-import crearGeneradorDeTablas from "../generadorDeTablasSql.js";
+import productosRaw from "../Objetos/productos.js";
+import crearGeneradorDeTablas from "./generadorDeTablasSql.js";
 
 const tablacb = (tabla) => {
   tabla.increments("id").primary();

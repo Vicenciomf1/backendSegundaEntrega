@@ -1,6 +1,6 @@
 import sqlite from "../../../db/sqlite/sqliteconnection.js";
-import mensajesRaw from "./mensajes.js";
-import crearGeneradorDeTablas from "../generadorDeTablasSql.js";
+import mensajesRaw from "../Objetos/mensajes.js";
+import crearGeneradorDeTablas from "./generadorDeTablasSql.js";
 
 
 const tablacb = (tabla) => {

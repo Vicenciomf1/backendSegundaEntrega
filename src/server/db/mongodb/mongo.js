@@ -5,9 +5,7 @@ dotenv.config();
 const { STRING_CONEXION_MONGO } = process.env;
 const options = {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  serverSelectionTimeoutMS: 5000
+  useUnifiedTopology: true
 };
 
 const mongoDB = mongoose.connect(STRING_CONEXION_MONGO, options)

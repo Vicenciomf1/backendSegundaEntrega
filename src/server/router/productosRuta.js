@@ -1,9 +1,9 @@
 import { Router } from "express";
-import Contenedor from "../contenedores/ContenedorFs.js";
+import Producto from "../daos/mongo/product.js";
 import authMiddleware from "../utils/authMiddleware.js";
 
 const productosRuta = Router();
-export const contenedorProductos = new Contenedor("productos.txt");
+export const contenedorProductos = new Producto();
 
 productosRuta.get("/", async (req, res) => {
   const productos = await contenedorProductos.getAll();

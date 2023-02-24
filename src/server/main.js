@@ -1,8 +1,15 @@
 import app, {io} from "./config/init.js";
-import {connectionEvent} from "./websockets/websocketsCallbacks.js";
 import productosRuta from "./router/productosRuta.js";
 import carritoRuta from "./router/carritoRuta.js";
+import {connectionEvent} from "./websockets/websocketsCallbacks.js";
+import {borrarTodoMongo, generarTodoMongo} from "./utils/Inicio/Mongo/generarTodasLasColecciones.js";
 
+(
+  async () => {
+    //await borrarTodoMongo();
+    //await generarTodoMongo();
+  }
+)()
 
 // Endpoints no tomados por el enrutador del cliente
 

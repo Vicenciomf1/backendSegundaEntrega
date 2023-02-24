@@ -25,7 +25,9 @@ export default class ContenedorMongo {
 
   async saveMany(objetos){
     try{
+      console.log("Guardando muchos objetos...");
       await this.coleccion.insertMany(objetos);
+      console.log("Objetos guardados.");
     } catch (e) {
       console.log("Error al guardar los objetos: ", e);
     }
@@ -82,6 +84,7 @@ export default class ContenedorMongo {
 
   async deleteAll(){
     try{
+      console.log("Eliminando muchos arhcivos...");
       await this.coleccion.deleteMany({});
     } catch (e) {
       console.log("Error al eliminar los objetos: ", e);

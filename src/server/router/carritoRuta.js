@@ -1,9 +1,9 @@
 import { Router } from "express";
-import Contenedor from "../contenedores/ContenedorFs.js";
+import ShoppingCartSinNormalizar from "../daos/mongo/shoppingCartSinNormalizar.js";
 import { contenedorProductos } from "./productosRuta.js";
 
 const carritoRuta = Router();
-const contenedorCarrito = new Contenedor("carritos.txt");
+export const contenedorCarrito = new ShoppingCartSinNormalizar();
 
 // Crear carro
 carritoRuta.post("/", async (req, res) => {
