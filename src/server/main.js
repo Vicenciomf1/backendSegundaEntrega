@@ -1,7 +1,7 @@
 import app, {io} from "./config/init.js";
 import productosRuta from "./router/productosRuta.js";
 import carritoRuta from "./router/carritoRuta.js";
-import {connectionEvent} from "./websockets/websocketsCallbacks.js";
+import {connectionEvent, newMessage, newProduct} from "./websockets/websocketsCallbacks.js";
 import {borrarTodoMongo, generarTodoMongo} from "./utils/Inicio/Mongo/generarTodasLasColecciones.js";
 
 (
@@ -22,4 +22,7 @@ app.use("/api/carrito", carritoRuta);
 
 
 // Eventos de websockets
-io.on("connection", connectionEvent);
+io.on("connection", (data) => connectionEvent(io, data));
+// io.on("new-product", newProduct);
+//io.on("new-product", (data) => console.log("Nuevo producto, datos: ", data));
+//io.on("new-message", (data) => newMessage(io, data));

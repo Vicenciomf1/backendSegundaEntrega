@@ -1,7 +1,7 @@
 <section class="row">
     <div class="col-12">
         <h1 class="text-center">Formulario:</h1>
-        <form onsubmit="return addProduct(this)">
+        <form id="formulario">
             <div class="mb-3">
                 <label for="title" class="form-label">Título del producto</label>
                 <input type="text" class="form-control" id="title" aria-describedby="tituloProducto" name="title">
@@ -38,7 +38,7 @@
 </section>
 <section>
     <h2>Centro de Mensajes</h2>
-    <form onsubmit="return addMessage(this)">
+    <form id="formularioMensajes">
         <div class="mb-3">
             <label for="email" class="form-label">¿Cuál es tu correo?</label>
             <input type="email" class="form-control" id="email" aria-describedby="correo">

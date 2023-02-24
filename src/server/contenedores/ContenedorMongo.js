@@ -4,13 +4,13 @@ import {model} from "mongoose";
 const formatoCliente = (document, retorno) => {
   retorno.id = retorno._id.toString();
   delete retorno._id;
-  delete retorno.__v;
 };
 
 export default class ContenedorMongo {
   constructor(nombreColeccion, esquema){
-    esquema.set("toJSON", { "transform": formatoCliente });
+    esquema.set("toJSON", { transform: formatoCliente, versionKey: false });
     this.db = mongoDB;
+    this.nombre = nombreColeccion;
     this.coleccion = model(nombreColeccion, esquema);  // Modelo (MVC) entregado por mongoose
   }
 
@@ -35,7 +35,8 @@ export default class ContenedorMongo {
 
   async getById(Id){
     try{
-      return await this.coleccion.findOne( { _id: Id }).toJSON();
+      const objeto = await this.coleccion.findOne( { _id: Id } );
+      return objeto.toJSON();
     } catch (e) {
       console.log("Error al obtener el objeto: ", e);
     }
@@ -43,9 +44,10 @@ export default class ContenedorMongo {
 
   async getAll(){
     try{
-      return await this.coleccion.find({}, {_id: 0, id: "$_id", _v: 0});
+      const objetos = await this.coleccion.find({});
+      return objetos.map(objeto => objeto.toJSON());
     } catch (e) {
-      console.log("Error al obtener los objetos: ", e);
+      console.log(`Error al obtener todos los objetos de la colección ${this.nombre}: "${e}"`);
     }
   }
 
