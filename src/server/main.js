@@ -13,7 +13,7 @@ import {borrarTodoMongo, generarTodoMongo} from "./utils/Inicio/Mongo/generarTod
 
 // Endpoints no tomados por el enrutador del cliente
 
-app.get('/', (req, res) => {
+app.get('/chat', (req, res) => {
   res.render('templates/chat');
 });
 

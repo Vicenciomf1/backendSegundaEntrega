@@ -1,18 +1,17 @@
 import express from "express";
-import mime from "mime;"
 import {engine} from "express-handlebars";
 import {Server as IOServer} from "socket.io";
 
 import {__dirname} from "../utils/dirname.js";
 import path from "path";
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 
 import ViteExpress from "vite-express";
 import Mensaje from "../daos/mongo/message.js";
 
 dotenv.config();
 const app = express();
-export const PORT = process.env.PORT || 8080;
+export const PORT = process.env.PORT || 3000;
 ViteExpress.config({ mode: "development" });
 
 // No sabía dónde más ponerlo para tenerlo disponible D:
