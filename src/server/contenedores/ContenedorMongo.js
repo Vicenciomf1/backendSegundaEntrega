@@ -1,23 +1,25 @@
 import mongoDB from "../db/mongodb/mongo.js";
-import {model} from "mongoose";
+import mongoose from "mongoose";
 
 const formatoCliente = (document, retorno) => {
   retorno.id = retorno._id.toString();
   delete retorno._id;
 };
 
+const ObjectId = mongoose.Types.ObjectId;
+
 export default class ContenedorMongo {
   constructor(nombreColeccion, esquema){
     esquema.set("toJSON", { transform: formatoCliente, versionKey: false });
     this.db = mongoDB;
     this.nombre = nombreColeccion;
-    this.coleccion = model(nombreColeccion, esquema);  // Modelo (MVC) entregado por mongoose
+    this.coleccion = mongoose.model(nombreColeccion, esquema);  // Modelo (MVC) entregado por mongoose
   }
 
   async save(objeto){
     try{
       const {_id: objectId} = await this.coleccion(objeto).save();
-      return objectId.toHexString();  // Devuelve el ID, ¿cuál es la diferencia con toString()?
+      return objectId.toString();  // Devuelve el ID, ¿cuál es la diferencia con toString()?
     } catch (e) {
       console.log("Error al guardar el objeto: ", e);
     }
@@ -35,7 +37,8 @@ export default class ContenedorMongo {
 
   async getById(Id){
     try{
-      const objeto = await this.coleccion.findOne( { _id: Id } );
+      const objeto = await this.coleccion.findOne( { _id: ObjectId(Id) } );
+      if (!objeto) return null;
       return objeto.toJSON();
     } catch (e) {
       console.log("Error al obtener el objeto: ", e);
@@ -51,9 +54,9 @@ export default class ContenedorMongo {
     }
   }
 
-  async updateById(objetoNuevo){
+  async updateById(Id, objetoNuevo){
     try{
-      return await this.coleccion.replaceOne({ id: objetoNuevo.id }, objetoNuevo);
+      return await this.coleccion.replaceOne({ _id: ObjectId(Id) }, objetoNuevo);
     } catch (e) {
       console.log("Error al actualizar el objeto: ", e);
     }
@@ -61,7 +64,7 @@ export default class ContenedorMongo {
 
   async updateFieldById(Id, field, value){
     try{
-      return await this.coleccion.updateOne({ id: Id }, { $set: { [field]: value } });
+      return await this.coleccion.updateOne({ _id: ObjectId(Id) }, { $set: { [field]: value } });
     } catch (e) {
       console.log("Error al actualizar el campo del objeto: ", e);
     }
@@ -69,7 +72,7 @@ export default class ContenedorMongo {
 
   async deleteById(Id){
     try{
-      await this.coleccion.deleteOne({ id: Id });
+      return await this.coleccion.deleteOne({ _id: ObjectId(Id) });
     } catch (e) {
       console.log("Error al eliminar el objeto: ", e);
     }

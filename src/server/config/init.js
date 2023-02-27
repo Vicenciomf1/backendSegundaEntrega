@@ -12,13 +12,12 @@ import Mensaje from "../daos/mongo/message.js";
 dotenv.config();
 const app = express();
 export const PORT = process.env.PORT || 3000;
-ViteExpress.config({ mode: "development" });
+ViteExpress.config({ mode: "development", vitePort: 8080 });
 
 // No sabía dónde más ponerlo para tenerlo disponible D:
 export const contenedorMensajes = new Mensaje();
 
 // Rutas desde utils
-//const publicRoot = path.resolve(__dirname, "../../public");
 const viewsRoot = path.resolve(__dirname, "../views");
 const layoutsDir = path.resolve(__dirname, "../views/layouts");
 
@@ -26,7 +25,6 @@ const layoutsDir = path.resolve(__dirname, "../views/layouts");
 // Para usar json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use(express.static(publicRoot));
 
 // Para el motor de plantillas
 app.engine('hbs', engine({

@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "nodemon src/server/main.js -w src/server",
     "start": "NODE_ENV=production node src/server/main.js",
-    "build": "vite build"
+    "build": "vite build",
+    "debugWatch": "nodemon --inspect src/server/main.js -w src/server",
+    "debug": "node --inspect-brk src/server/main.js"
   },
   "type": "module",
   "dependencies": {

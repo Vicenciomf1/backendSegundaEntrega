@@ -7,7 +7,9 @@ export const esquemaProductos = new Schema({
   codigo: { type: Number, required: true },
   precio: { type: Number, required: true },
   foto: { type: String, required: true },
-  stock: { type: Number, required: true }
+  stock: { type: Number, required: true },
+  created_at: { type: Date, default: Date.now },  // Este es el timestamp que piden
+  updated_at: { type: Date, default: Date.now }  // Hay un operador que te actualiza esto en mongo, se llama $currentDate
 });
 
 export default class Producto extends ContenedorMongo {

@@ -23,6 +23,3 @@ app.use("/api/carrito", carritoRuta);
 
 // Eventos de websockets
 io.on("connection", (data) => connectionEvent(io, data));
-// io.on("new-product", newProduct);
-//io.on("new-product", (data) => console.log("Nuevo producto, datos: ", data));
-//io.on("new-message", (data) => newMessage(io, data));
